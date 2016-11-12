@@ -5,7 +5,8 @@
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "commit": "git add . && git commit && git push origin master"
+    "commit": "git add . && git commit && git push origin master",
+    "pull": "git pull origin"
   },
   "repository": {
     "type": "git",
