@@ -1,0 +1,24 @@
+{
+  "name": "infringe.js",
+  "version": "1.0.0",
+  "description": "A game. :)",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "commit": "git add . && git commit && git push origin master"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/legodude17/infringe.js.git"
+  },
+  "keywords": [
+    "game",
+    "js"
+  ],
+  "author": "JDB and CG",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/legodude17/infringe.js/issues"
+  },
+  "homepage": "https://github.com/legodude17/infringe.js#readme"
+}
