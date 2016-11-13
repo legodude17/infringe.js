@@ -66,7 +66,7 @@ class Game extends Phaser.State {
     this.game.physics.enable(missle, Phaser.Physics.ARCADE);
     missle.anchor.setTo(0.5);
     missle.rotation = this.player.rotation;
-    missle.velocity = this.game.physics.arcade.velocityFromRotation(missle.rotation, 300);
+    this.game.physics.arcade.velocityFromRotation(missle.rotation, 300, missle.body.velocity);
     missle.animations.add('go');
     missle.animations.play('go', 10, true);
     missle.checkWorldBounds = true;
