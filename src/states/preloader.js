@@ -32,7 +32,9 @@ class Preloader extends Phaser.State {
       this.game.load.image('person');
       this.game.load.image('pwrblt');
       this.game.load.image('x');
-      this.game.load.image('background', 'Snowtex.png')
+      this.game.load.image('background', 'Snowtex.png');
+      this.game.load.image('bullet', 'bullett orange.png');
+      this.game.load.audio('lab', 'Lab Room.wav');
       this.game.load.spritesheet('missile', null, 89, 191, 4);
   }
 
