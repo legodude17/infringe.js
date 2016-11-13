@@ -66,7 +66,7 @@ class Game extends Phaser.State {
     this.game.physics.enable(missle, Phaser.Physics.ARCADE);
     missle.anchor.setTo(0.5);
     missle.rotation = this.player.rotation;
-    missle.body.velocity = this.game.physics.arcade.velocityFromAngle(missle.rotation, 300);
+    missle.velocity = this.game.physics.arcade.velocityFromRotation(missle.rotation, 300);
     missle.animations.add('go');
     missle.animations.play('go', 10, true);
     missle.checkWorldBounds = true;
@@ -107,7 +107,11 @@ class Game extends Phaser.State {
     room = this.room = rooms.rooms[this.game.global.room];
     rooms.parse(room);
     document.title = this.game.global.room + ' Room - Infringe';
-    this.add.audio(room.music).play(null, null, null, true, true);
+    console.log(room.music.replace('.wav', ''));
+    var audio = this.add.audio(room.music.replace('.wav', ''));
+    audio.play(null, null, null, true, true);
+    audio.mute = false;
+    audio.volume = 1;
     for (y = 0; y < room.mapParsed.length; y++) {
       for (x = 0; x < room.mapParsed[y].length; x++) {
         if (room.mapParsed[y][x] === 'portal') {
@@ -116,10 +120,6 @@ class Game extends Phaser.State {
           this.add.image(x * 32, y * 32, room.mapParsed[y][x]);
         }
       }
-      var sprite = this.walls.create(x * 32, y * 32);
-      sprite.body.immovable = true;
-      sprite.collideWorldBounds = true;
-      sprite.allowGravity = false;
     }
     this.game.world.setBounds(0, 0, x * 32, y * 32);
   }

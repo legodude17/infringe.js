@@ -35,7 +35,8 @@ class Preloader extends Phaser.State {
       Object.keys(rooms.rooms).filter(function (v) {
         return v !== 'default';
       }).forEach(function (i) {
-        this.game.load.audio(rooms.rooms[i].music, rooms.rooms[i].music);
+        console.log(rooms.rooms[i].music.replace('.wav', ''));
+        this.game.load.audio(rooms.rooms[i].music.replace('.wav', ''), rooms.rooms[i].music);
       }, this);
   }
 
