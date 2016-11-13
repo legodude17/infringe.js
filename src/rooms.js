@@ -6,17 +6,22 @@ rooms.default = {
   ],
   mapParsed: [],
   entitys: ['0,0,texture1','10,10,texture2'],
-  textureMap: {a:'texture3',b:'texture4',s:'texture0'}
+  textureMap: {a:'texture3',b:'texture4',s:'texture0'},
+  music: 'room.music',
+  next: 'next room'
 };
 rooms.Bed={
   map:[
     'ccccc',
-    'btlll',
+    'btllp',
     'ccccc',
   ],
   mapParsed: [],
-  textureMap:{t:'bed_head_top',b:'bed_feet_top',c:'wool_colored_cyan',l:'brick'}
+  textureMap:{t:'bed_head_top',b:'bed_feet_top',c:'wool_colored_cyan',l:'brick', p:'portal'},
+  music: '',
+  next: 'Lab'
 };
+
 var parseTextures=(obj)=>{
   if(!obj.mapParsed.length){
     for(var a in obj.map){

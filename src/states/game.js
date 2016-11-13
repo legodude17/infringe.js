@@ -8,11 +8,12 @@ class Game extends Phaser.State {
   create() {
     this.walls = this.add.group(null, 'walls', false, true, Phaser.Physics.ARCADE);
     this.renderRoom();
-    console.log('Starting create');
     this.add.audio('lab').play();
     var player = this.player = this.game.global.player = this.add.sprite(0, 0, 'person');
     this.game.physics.enable(player, Phaser.Physics.ARCADE);
     player.anchor.setTo(0.5, 0.5);
+    player.body.collideWorldBounds = true;
+    player.poweredUp = false;
     this.add.button(this.game.width - 40, 10, 'Pause', this.pauseGame, this);
     this.keys = this.game.input.keyboard.addKeys( { 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'right': Phaser.KeyCode.D, 'firemissle': Phaser.KeyCode.SPACEBAR} );
     var weapon = this.add.weapon(10, 'bullet');
@@ -20,9 +21,8 @@ class Game extends Phaser.State {
     weapon.bulletSpeed = 600;
     weapon.fireRate = 1;
     weapon.trackSprite(player, 0, 0, true);
-    this.game.input.onDown.add(function(){this.fire(); }, weapon);
+    this.game.input.onDown.add(function(){if (player.poweredUp){}else{weapon.fire(); }});
     this.enemies = this.add.group(null, 'enemies', false, true, Phaser.Physics.ARCADE);
-    console.log('Done with create');
   }
 
   update() {
@@ -48,6 +48,9 @@ class Game extends Phaser.State {
     if (this.keys.firemissle.isDown) {
       this.fireMissle();
     }
+    if (this.game.physics.arcade.intersects(this.player.body, this.portal.body)) {
+      this.advance();
+    }
   }
 
   pauseGame() {
@@ -61,19 +64,22 @@ class Game extends Phaser.State {
     var missle = this.add.sprite(this.player.x, this.player.y, 'missile');
     this.game.physics.enable(missle, Phaser.Physics.ARCADE);
     missle.rotation = this.player.rotation;
-    missle.body.velocity.x = 200 * Math.cos(missle.rotation);
-    missle.body.velocity.y = 200 * Math.sin(missle.rotation);
+    missle.body.velocity = this.game.physics.arcade.velocityFromAngle(missle.rotation, 300);
     missle.animations.add('go');
     missle.animations.play('go', 10, true);
     missle.checkWorldBounds = true;
-    missle.killWorldBounds = true;
+    missle.outOfBoundsKill = true;
     this.missle = true;
     missle.events.onKilled.add(function() {
       this.missle = false;
     }, this);
-    missle.events.onOutOfBounds.add(function() {
-      this.missle = false;
-    }, this);
+  }
+
+  createPortal(x, y) {
+    var portal = this.portal = this.add.sprite(x, y, 'portal');
+    this.game.physics.enable(portal, Phaser.Physics.ARCADE);
+    portal.animations.add('default');
+    portal.animations.play('default', 15, true);
   }
 
   endGame() {
@@ -95,20 +101,30 @@ class Game extends Phaser.State {
   }
 
   renderRoom() {
-    console.log('Rendering Room');
-    var room = rooms.rooms[this.game.global.room];
+    var x, y, room;
+    room = this.room = rooms.rooms[this.game.global.room];
     rooms.parse(room);
-    console.log(room);
-    for (var y = 0; y < room.mapParsed.length; y++) {
-      for (var x = 0; x < room.mapParsed[y].length; x++) {
-        this.add.image(x * 32, y * 32, room.mapParsed[y][x]);
+    for (y = 0; y < room.mapParsed.length; y++) {
+      for (x = 0; x < room.mapParsed[y].length; x++) {
+        if (room.mapParsed[y][x] === 'portal') {
+          this.createPortal(x * 32, y * 32);
+        } else {
+          this.add.image(x * 32, y * 32, room.mapParsed[y][x]);
+        }
       }
       var sprite = this.walls.create(x * 32, y * 32);
-
       sprite.body.immovable = true;
       sprite.collideWorldBounds = true;
       sprite.allowGravity = false;
     }
+    this.game.world.setBounds(0, 0, x * 32, y * 32);
+  }
+
+  advance() {
+    this.player.x = 0;
+    this.player.y = 0;
+    this.game.global.room = this.room.next;
+    this.renderRoom();
   }
 }
 

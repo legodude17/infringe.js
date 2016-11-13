@@ -1,3 +1,4 @@
+import rooms from '../rooms.js';
 class Preloader extends Phaser.State {
 
   constructor() {
@@ -26,26 +27,36 @@ class Preloader extends Phaser.State {
       // load your resources here
       this.game.load.baseURL = window.location;
       this.game.load.path = 'assets/';
-      this.game.load.image('play');
-      this.game.load.image('check');
-      this.game.load.image('Pause');
-      this.game.load.image('person');
-      this.game.load.image('pwrblt');
-      this.game.load.image('x');
-      this.game.load.image('snow');
       this.game.load.image('bullet', 'bullett orange.png');
       this.game.load.audio('lab', 'Lab Room.wav');
-      this.game.load.image('planks_big_oak');
-      this.game.load.image('bed_head_top');
-      this.game.load.image('Zombie');
-      this.game.load.image('brick');
-      this.game.load.image('wool_colored_cyan');
-      this.game.load.image('bed_feet_top');
+      this.game.load.images(['play', 'Pause', 'person', 'pwrblt', 'snow']);
+      this.game.load.images(this.generateImages());
       this.game.load.spritesheet('missile', null, 252 * 0.25, 89 * 0.25, 4);
+      this.game.load.spritesheet('portal', null, 32, 32);
   }
 
   onLoadComplete() {
     this.ready = true;
+  }
+
+  generateImages() {
+    var imgs = [];
+    Object.keys(rooms.rooms).filter(function (v) {
+      return v !== 'default';
+    }).map(function (v) {
+      return rooms.rooms[v];
+    }).map(function (v) {
+      return Object.keys(v.textureMap).map(function (i) {
+        return v.textureMap[i];
+      }).filter(function (v) {
+        return v !== 'portal';
+      })
+    }).forEach(function (v) {
+      v.forEach(function (v) {
+        imgs.push(v);
+      });
+    });
+    return imgs;
   }
 }
 
