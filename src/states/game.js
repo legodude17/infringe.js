@@ -8,12 +8,13 @@ class Game extends Phaser.State {
   create() {
     this.walls = this.add.group(null, 'walls', false, true, Phaser.Physics.ARCADE);
     this.renderRoom();
-    this.add.audio('lab').play();
     var player = this.player = this.game.global.player = this.add.sprite(0, 0, 'person');
     this.game.physics.enable(player, Phaser.Physics.ARCADE);
     player.anchor.setTo(0.5, 0.5);
     player.body.collideWorldBounds = true;
     player.poweredUp = false;
+    player.x = player.width/2;
+    player.y = player.height/2;
     this.add.button(this.game.width - 40, 10, 'Pause', this.pauseGame, this);
     this.keys = this.game.input.keyboard.addKeys( { 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'right': Phaser.KeyCode.D, 'firemissle': Phaser.KeyCode.SPACEBAR} );
     var weapon = this.add.weapon(10, 'bullet');
@@ -63,6 +64,7 @@ class Game extends Phaser.State {
     }
     var missle = this.add.sprite(this.player.x, this.player.y, 'missile');
     this.game.physics.enable(missle, Phaser.Physics.ARCADE);
+    missle.anchor.setTo(0.5);
     missle.rotation = this.player.rotation;
     missle.body.velocity = this.game.physics.arcade.velocityFromAngle(missle.rotation, 300);
     missle.animations.add('go');
@@ -104,6 +106,8 @@ class Game extends Phaser.State {
     var x, y, room;
     room = this.room = rooms.rooms[this.game.global.room];
     rooms.parse(room);
+    document.title = this.game.global.room + ' Room - Infringe';
+    this.add.audio(room.music).play(null, null, null, true, true);
     for (y = 0; y < room.mapParsed.length; y++) {
       for (x = 0; x < room.mapParsed[y].length; x++) {
         if (room.mapParsed[y][x] === 'portal') {
@@ -121,8 +125,8 @@ class Game extends Phaser.State {
   }
 
   advance() {
-    this.player.x = 0;
-    this.player.y = 0;
+    player.x = player.width/2;
+    player.y = player.height/2;
     this.game.global.room = this.room.next;
     this.renderRoom();
   }

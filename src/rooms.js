@@ -12,15 +12,26 @@ rooms.default = {
 };
 rooms.Bed={
   map:[
-    'ccccc',
-    'btllp',
-    'ccccc',
+    'wwwwwwwwww',
+    'ccccccwwww',
+    'cbtllwwwwp',
+    'ccccccwwww',
+    'wwwwwwwwww'
   ],
   mapParsed: [],
-  textureMap:{t:'bed_head_top',b:'bed_feet_top',c:'wool_colored_cyan',l:'brick', p:'portal'},
-  music: '',
+  textureMap:{t:'bed_head_top',b:'bed_feet_top',c:'wool_colored_cyan',l:'brick', p:'portal', w: 'planks_big_oak'},
+  music: 'Dumdum.wav',
   next: 'Lab'
 };
+/*rooms.Lab = {
+  map:[
+
+  ],
+  mapParsed: [],
+  textureMap:{},
+  music:'Lab Room.wav',
+  next: 'Test'
+};*/
 
 var parseTextures=(obj)=>{
   if(!obj.mapParsed.length){
