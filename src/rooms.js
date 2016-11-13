@@ -50,23 +50,27 @@ rooms.Lab = {
 };
 rooms.Outside = {
   map: [
-    'ssssssssssssssssssssss',
-    'ssssssssssssssssssssss',
-    'ssssssssssssssssssssss',
-    'ssssssssssssssssssssss',
-    'ssssssssssssssssssssss',
-    'ssssssssssssssssssssss',
-    'ssssssssssssssssssssss',
-    'ssssssssssssssssssssss',
-    'ssssssssssssssssssssss'
+    'sssssssssssssssssss',
+    'sssIssssssssssssscs',
+    'sssssssssssssssssss',
+    'ssssssssiiiiIssssss                                ddd',
+    'sssssssiIsisissssss                                dpd',
+    'scsssssiIiIisssssss                  wwwwwwwwww    ddd',
+    'ssssssssiiisscsssss                  wwwwwwwwww',
+    'sssscssssssssscssss                  wwwwwwwwww',
+    'sssssssssssssssssss                  wwwwwwwwww',
+    '        aac                          wwwwwwwwww'
+    '        aaa                          wwwwwwwwww',
+    '        caa                          wwwwwwwwww',
+    '        acagacc                      wwwwwwwwww',
+    '       caaIacagaagcacgacacacagccaccacwwwwwwwwww',
+    '        aacg iicascccacaigcacacIgacacwwwwwwwwww'
   ],
   mapParsed: [],
-  textureMap: {s: 'snow'},
+  textureMap: {w:'planks_birch',s: 'snow',a:'stone_andesite',c:'cobblestone',g:'gravel',I:'ice_packed',i:'ice',d:'diamond_block'},
   music: 'Dumdum.wav',
-  next: "?",
-  text: 'Wha? What should have been a controlled experiment somehow got you in the middle of a barren tundra, even though you live in Florida.',
-  entitys: ['100,100,enemies/Zombie'],
-  parsedEnts: []
+  next: "a",
+  text: 'Wha? What should have been a controlled experiment somehow got you in the middle of a barren tundra, even though you live in florida'
 };
 
 var parseTextures=function(obj){
