@@ -5,7 +5,7 @@ rooms.default = {
     'saba'
   ],
   mapParsed: [],
-  entitys: ['0,0,texture1','10,10,texture2'],
+  entitys: ['0,0,enemy/texture1','10,10,friend/texture2'],
   textureMap: {a:'texture3',b:'texture4',s:'texture0'},
   music: 'room.music',
   next: 'next room'
@@ -22,7 +22,8 @@ rooms.Bed={
   textureMap:{t:'bed_head_top',b:'bed_feet_top',c:'wool_colored_cyan',l:'brick', p:'portal', w: 'planks_big_oak'},
   music: 'Bed.wav',
   next: 'Lab',
-  text: 'You are the brilliant Dr. Syphla. You have been ordered to test the new wormhole device. You were also told to be ready for anything, hence the gun.'
+  text: 'You are the brilliant Dr. Syphla. You have been ordered to test the new wormhole device. You were also told to be ready for anything, hence the gun.',
+  parsedEnts: []
 };
 rooms.Lab = {
   map:[
@@ -62,7 +63,8 @@ rooms.Outside = {
   textureMap: {s: 'snow'},
   music: 'Dumdum.wav',
   next: "?",
-  text: 'Wha? What should have been a controlled experiment somehow got you in the middle of a barren tundra, even though you live in florida'
+  text: 'Wha? What should have been a controlled experiment somehow got you in the middle of a barren tundra, even though you live in florida',
+  parsedEnts: []
 };
 
 var parseTextures=function(obj){
@@ -76,10 +78,28 @@ var parseTextures=function(obj){
   }
   return obj.mapParsed;
 };
-var parseEnt=function(str){return str.split(','); };
+var parseEnt=function(obj){
+  if (obj.parsedEnts.length || !obj.entitys) {
+    return;
+  }
+  obj.parsedEnts = obj.entitys.map(function (str) {
+    var arr = str.split(',');
+    return {
+      x: arr[0],
+      y: arr[1],
+      type: {
+        group: arr[2].split('/')[0],
+        texture: arr[2].split('/')[1]
+      }
+    };
+  });
+};
 
 var API = {
-  parse: parseTextures,
+  parse: function (obj) {
+    parseTextures(obj);
+    parseEnt(obj);
+  },
   rooms
 };
 export default API;

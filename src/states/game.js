@@ -25,6 +25,8 @@ class Game extends Phaser.State {
     this.game.input.onDown.add(function(){if (player.data.poweredUp){}else{weapon.fire(); }});
     this.enemies = this.add.group(null, 'enemies', false, true, Phaser.Physics.ARCADE);
     this.game.camera.follow(player);
+    player.events.onKilled.add(this.endGame, this);
+    player.health = player.maxHealth = 100;
   }
 
   update() {
@@ -53,9 +55,14 @@ class Game extends Phaser.State {
     if (this.portal.body && this.game.physics.arcade.intersects(this.player.body, this.portal.body)) {
       this.advance();
     }
+    if (this.game.physics.arcade.overlap(this.player, this.enemies)) {
+      this.player.damage(1);
+    }
     this.game.physics.arcade.collide(this.player, this.walls);
     this.game.physics.arcade.collide(this.walls, this.missile, function(missile){console.log('Collide!'); missile.kill(); });
     this.game.physics.arcade.collide(this.weapon.bullets, this.walls, function(bullet){bullet.kill(); });
+    this.game.physics.arcade.collide(this.weapon.bullets, this.enemies, function(bullet, enemy){bullet.kill(); enemy.damage(27); });
+    this.game.physics.arcade.collide(this.enemies, this.missile, function(missile, enemy){missile.kill(); enemy.damage(41); });
     this.player.bringToTop();
   }
 
@@ -185,6 +192,25 @@ class Game extends Phaser.State {
     } while (!done);
 
     return res + str;
+  }
+
+  createEntity(obj) {
+    var group = (obj.type.group === 'enemies' ? this.enemies : this.friends);
+    var e = group.create(obj.x, obj.y, obj.type.texture);
+    e.health = e.maxHealth = 100;
+    e.data.update = this.updateFunc(obj.type.group);
+    e.data.parent = e;
+  }
+
+  updateFunc(group) {
+    var self = this;
+    var game = this.game;
+    switch (group) {
+      case 'enemies':
+        return function () {
+          this.parent.body.velocity = game.physics.arcade.velocityFromRotation(game.physics.arcade.angleBetween(this.parent, self.player), 200);
+        };
+    }
   }
 }
 
