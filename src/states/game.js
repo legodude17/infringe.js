@@ -58,6 +58,7 @@ class Game extends Phaser.State {
     if (this.game.physics.arcade.overlap(this.player, this.enemies)) {
       this.player.damage(1);
     }
+    this.enemies.forEachAlive(function(v){v.data.update(); });
     this.game.physics.arcade.collide(this.player, this.walls);
     this.game.physics.arcade.collide(this.walls, this.missile, function(missile){console.log('Collide!'); missile.kill(); });
     this.game.physics.arcade.collide(this.weapon.bullets, this.walls, function(bullet){bullet.kill(); });
@@ -163,7 +164,7 @@ class Game extends Phaser.State {
   }
 
   createWall(x, y) {
-    var wall = this.walls.create(x, y, 'wool_colored_cyan');
+    var wall = this.walls.create(x, y);
     wall.body.immovable = true;
     wall.collideWorldBounds = true;
     wall.allowGravity = false;
@@ -199,10 +200,13 @@ class Game extends Phaser.State {
 
   createEntity(obj) {
     var group = (obj.type.group === 'enemies' ? this.enemies : this.friends);
-    var e = group.create(obj.x, obj.y, obj.type.texture);
+    var e = group.create(+obj.x, +obj.y, obj.type.texture);
     e.health = e.maxHealth = 100;
+    e.bringToTop();
     e.data.update = this.updateFunc(obj.type.group);
     e.data.parent = e;
+    e.body.debug = true;
+    console.log(e);
   }
 
   updateFunc(group) {
@@ -211,8 +215,15 @@ class Game extends Phaser.State {
     switch (group) {
       case 'enemies':
         return function () {
-          this.parent.body.velocity = game.physics.arcade.velocityFromRotation(game.physics.arcade.angleBetween(this.parent, self.player), 200);
+          this.parent.body.velocity = game.physics.arcade.velocityFromRotation(game.physics.arcade.angleBetween(this.parent, self.player), 100);
         };
+    }
+  }
+
+  render() {
+    if (this.enemies.children[0]) {
+      this.game.debug.body(this.enemies.children[0].body, null, true);
+      this.game.debug.bodyInfo(this.enemies.children[0].body);
     }
   }
 }

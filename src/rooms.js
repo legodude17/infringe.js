@@ -45,7 +45,8 @@ rooms.Lab = {
   text: 'This is your lab, where you make the most important discoveries. Go through the hallway to test it out.',
   onButtonPress: function() {
     this.advance();
-  }
+  },
+  parsedEnts: []
 };
 rooms.Outside = {
   map: [
