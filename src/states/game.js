@@ -111,14 +111,13 @@ class Game extends Phaser.State {
   renderRoom() {
     var x, y, room;
     if (this.imgs.text) {
-      this.imgs.text.kill();
       this.imgs.text.destroy();
     }
     if (this.imgs.length) {
       this.imgs.forEach(function(v){v.destroy(); });
       this.imgs = [];
     }
-    this.walls.children.forEach(function(v){v.destroy(); });
+    this.walls.removeAll(true);
     room = this.room = rooms.rooms[this.game.global.room];
     rooms.parse(room);
     document.title = this.game.global.room + ' Room - Infringe';
