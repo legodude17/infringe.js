@@ -35,7 +35,13 @@ class Preloader extends Phaser.State {
       this.game.load.image('snow');
       this.game.load.image('bullet', 'bullett orange.png');
       this.game.load.audio('lab', 'Lab Room.wav');
-      this.game.load.spritesheet('missile', null, 89, 191, 4);
+      this.game.load.image('planks_big_oak');
+      this.game.load.image('bed_head_top');
+      this.game.load.image('Zombie');
+      this.game.load.image('brick');
+      this.game.load.image('wool_colored_cyan');
+      this.game.load.image('bed_feet_top');
+      this.game.load.spritesheet('missile', null, 252 * 0.25, 89 * 0.25, 4);
   }
 
   onLoadComplete() {

@@ -32,7 +32,7 @@ class Boot extends Phaser.State {
 
   initGlobalVariables(){
     this.game.global = {
-
+      room: 'Bed'
     };
   }
 
