@@ -31,8 +31,8 @@ rooms.Lab = {
     'wwwwwwwwwwwwwwwwww   oxxxxxxxxxxxxxxxo      jjpwwwwwwwwdwwwwwwwwwwww',
     'wwwwwwwlllwwwwwwww   oxxxxxxxxxxxxxxxo      ppwwwwwwwggdggwwwwwwwwww',
     'wwwwwwwlilwwwwwwww   oxxxxxxxxxxxooooo      wwwwwwwwwgeeegwwwwwwwwww',
-    'wwwwwwwlllwwwwwwww   occccccccccoo      c   wwwwwwwwddebeddwwwwwwwww',
-    'wwwwwwwwwwwwwwwwww   ooooooossoooo    c     wwwwwwwwwgeeegwwwwwwwwww',
+    'wwwwwwwlllwwwwwwww   occccccccccoo      f   wwwwwwwwddebeddwwwwwwwww',
+    'wwwwwwwwwwwwwwwwww   ooooooossoooo    f     wwwwwwwwwgeeegwwwwwwwwww',
     '                ss          ss              wwwwwwwwwggdggwwwwwwwwww',
     '                sssssssssssssssssssssssssssswwwwwwwwwwwdwwwwwwwwwwww',
     '                sssssssssssssssssssssssssssswwwwwwwwwwwwwwwwwwwwwwww'
