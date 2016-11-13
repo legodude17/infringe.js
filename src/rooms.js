@@ -59,7 +59,7 @@ rooms.Outside = {
     'ssssssssiiisscsssss                  wwwwwwwwww',
     'sssscssssssssscssss                  wwwwwwwwww',
     'sssssssssssssssssss                  wwwwwwwwww',
-    '        aac                          wwwwwwwwww'
+    '        aac                          wwwwwwwwww',
     '        aaa                          wwwwwwwwww',
     '        caa                          wwwwwwwwww',
     '        acagacc                      wwwwwwwwww',
@@ -70,7 +70,9 @@ rooms.Outside = {
   textureMap: {w:'planks_birch',s: 'snow',a:'stone_andesite',c:'cobblestone',g:'gravel',I:'ice_packed',i:'ice',d:'diamond_block'},
   music: 'Dumdum.wav',
   next: "a",
-  text: 'Wha? What should have been a controlled experiment somehow got you in the middle of a barren tundra, even though you live in florida'
+  text: 'Wha? What should have been a controlled experiment somehow got you in the middle of a barren tundra, even though you live in florida',
+  entitys: ['100,100,enemies/Zombie'],
+  parsedEnts: []
 };
 
 var parseTextures=function(obj){

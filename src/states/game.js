@@ -205,8 +205,7 @@ class Game extends Phaser.State {
     e.bringToTop();
     e.data.update = this.updateFunc(obj.type.group);
     e.data.parent = e;
-    e.body.debug = true;
-    console.log(e);
+    e.renderable = true;
   }
 
   updateFunc(group) {
@@ -222,8 +221,7 @@ class Game extends Phaser.State {
 
   render() {
     if (this.enemies.children[0]) {
-      this.game.debug.body(this.enemies.children[0].body, null, true);
-      this.game.debug.bodyInfo(this.enemies.children[0].body);
+      this.game.debug.body(this.enemies.children[0]);
     }
   }
 }
