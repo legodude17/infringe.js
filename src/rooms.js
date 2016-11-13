@@ -29,8 +29,8 @@ rooms.Lab = {
   map:[
     'wwwwwwwwwwwwwwwwww   ooooooooooooooooo      jjppwwwwwwwwwwwwwwwwwwww',
     'wwwwwwwwwwwwwwwwww   oxxxxxxxxxxxxxxxo      jjpwwwwwwwwdwwwwwwwwwwww',
-    'wwwwwwwlllwwwwwwww   oxxxxxxxxxxxxxxxo      ppwwwwwwwggdggwwwwwwwwww',
-    'wwwwwwwlilwwwwwwww   oxxxxxxxxxxxooooo      wwwwwwwwwgeeegwwwwwwwwww',
+    'wwwwwwwlllwwwwwwwwssscxxxxxxxxxxxxxxxo      ppwwwwwwwggdggwwwwwwwwww',
+    'wwwwwwwlilwwwwwwwwssscxxxxxxxxxxxooooo      wwwwwwwwwgeeegwwwwwwwwww',
     'wwwwwwwlllwwwwwwww   occccccccccoo      f   wwwwwwwwddebeddwwwwwwwww',
     'wwwwwwwwwwwwwwwwww   ooooooossoooo    f     wwwwwwwwwgeeegwwwwwwwwww',
     '                ss          ss              wwwwwwwwwggdggwwwwwwwwww',
@@ -38,15 +38,14 @@ rooms.Lab = {
     '                sssssssssssssssssssssssssssswwwwwwwwwwwwwwwwwwwwwwww'
   ],
   mapParsed: [],
-  textureMap:{w:'planks_big_oak',o:'iron_block',x:'cobblestone',c:'Caution',f:'cactus_top',s:'stonebrick_cracked',j:'sponge_wet', l:'brick', p: 'sponge', 'i': 'cauldron_inner', b: 'activate', d: 'diamond_block', g: 'gold_block', e:'emerald_block'},
+  textureMap:{w:'planks_jungle',o:'iron_block',x:'cobblestone',c:'Caution',f:'cactus_top',s:'stonebrick_cracked',j:'sponge_wet', l:'brick', p: 'sponge', 'i': 'cauldron_inner', b: 'activate', d: 'diamond_block', g: 'gold_block', e:'emerald_block'},
   music:'Lab Room.wav',
   next: 'Outside',
-  walls: ['8,3','21,0','21,1','21,2','21,3','21,4','21,5','22,5','23,5','24,5','25,5','26,5','27,5','30,5'],
+  walls: ['8,3','21,0','21,1','21,2','21,3','21,4','21,5','22,5','23,5','24,5','25,5','26,5','27,5','29,5','30,5'],
   text: 'This is your lab, where you make the most important discoveries. Go through the hallway to test it out.',
   onButtonPress: function() {
     this.advance();
-  },
-  parsedEnts: []
+  }
 };
 rooms.Outside = {
   map: [
