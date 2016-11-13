@@ -71,7 +71,7 @@ rooms.Outside = {
   music: 'Dumdum.wav',
   next: "a",
   text: 'Wha? What should have been a controlled experiment somehow got you in the middle of a barren tundra, even though you live in florida',
-  entitys: ['100,100,enemies/Zombie'],
+  entitys: ['100,100,enemies/Zombie', '150,100,enemies/Zombie', '200,100,enemies/Zombie', '100,150'],
   parsedEnts: []
 };
 
