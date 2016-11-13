@@ -14,30 +14,30 @@ rooms.Bed={
   map:[
     'wwwwwwwwww',
     'ccccccwwww',
-    'cbtllwwwwp',
+    'cbtccclllp',
     'ccccccwwww',
     'wwwwwwwwww'
   ],
   mapParsed: [],
   textureMap:{t:'bed_head_top',b:'bed_feet_top',c:'wool_colored_cyan',l:'brick', p:'portal', w: 'planks_big_oak'},
-  music: 'Dumdum.wav',
+  music: 'Bed.wav',
   next: 'Lab',
   text: 'You are the brilliant Dr. Syphla. You have been ordered to test the new wormhole device. You were also told to be ready for anything, hence the gun.'
 };
 rooms.Lab = {
   map:[
     'wwwwwwwwwwwwwwwwww                          wwwwwwwwwwwwwwwwwwwwwwww',
-    'wwwwwwwwwwwwwwwwww                          wwwwwwwwwwwdwwwwwwwwwww',
-    'wwwwwwwcccwwwwwwww                          wwwwwwwwwggdggwwwwwwwwww',
-    'wwwwwwwc cwwwwwwww                          wwwwwwwwwgeeegwwwwwwwwww',
-    'wwwwwwwcccwwwwwwww                          wwwwwwwwddebedddwwwwwwww',
+    'wwwwwwwwwwwwwwwwww                          wwwwwwwwwwwdwwwwwwwwwwww',
+    'wwwwwwwlllwwwwwwww                          wwwwwwwwwggdggwwwwwwwwww',
+    'wwwwwwwlilwwwwwwww                          wwwwwwwwwgeeegwwwwwwwwww',
+    'wwwwwwwlllwwwwwwww                          wwwwwwwwddebeddwwwwwwwww',
     'wwwwwwwwwwwwwwwwww                          wwwwwwwwwgeeegwwwwwwwwww',
     '                ww                          wwwwwwwwwggdggwwwwwwwwww',
     '                wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdwwwwwwwwwwww',
     '                wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww'
   ],
   mapParsed: [],
-  textureMap:{w:'planks_big_oak', c:'wool_colored_cyan', p: 'portal', 'i': 'cauldron_inner', b: 'activate', d: 'diamond_block', g: 'gold_block', e:'emerald_block'},
+  textureMap:{w:'planks_big_oak', l:'brick', p: 'portal', 'i': 'cauldron_inner', b: 'activate', d: 'diamond_block', g: 'gold_block', e:'emerald_block'},
   music:'Lab Room.wav',
   next: 'Outside',
   walls: ['8,3'],
@@ -60,7 +60,7 @@ rooms.Outside = {
   ],
   mapParsed: [],
   textureMap: {s: 'snow'},
-  music: '',
+  music: 'Dumdum.wav',
   next: "?",
   text: 'Wha? What should have been a controlled experiment somehow got you in the middle of a barren tundra, even though you live in florida'
 };

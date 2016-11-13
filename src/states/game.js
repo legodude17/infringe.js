@@ -55,7 +55,7 @@ class Game extends Phaser.State {
     }
     this.game.physics.arcade.collide(this.player, this.walls);
     this.game.physics.arcade.collide(this.walls, this.missile, function(missile){console.log('Collide!'); missile.kill(); });
-    this.game.physics.arcade.collide(this.weapon, this.walls, function(bullet){bullet.kill(); });
+    this.game.physics.arcade.collide(this.weapon.bullets, this.walls, function(bullet){bullet.kill(); });
     this.player.bringToTop();
   }
 
@@ -64,7 +64,7 @@ class Game extends Phaser.State {
   }
 
   fireMissle() {
-    if (this.missle) {
+    if (this.missile) {
       return;
     }
     var missle = this.add.sprite(this.player.x, this.player.y, 'missile');
@@ -76,9 +76,9 @@ class Game extends Phaser.State {
     missle.animations.play('go', 10, true);
     missle.checkWorldBounds = true;
     missle.outOfBoundsKill = true;
-    this.missle = missle;
+    this.missile = missle;
     missle.events.onKilled.add(function() {
-      this.missle = false;
+      this.missile = false;
     }, this);
   }
 
