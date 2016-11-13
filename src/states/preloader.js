@@ -11,6 +11,15 @@ class Preloader extends Phaser.State {
     //setup loading bar
     this.asset = this.add.sprite(this.game.width * 0.5 - 110, this.game.height * 0.5 - 10, 'preloader');
     this.load.setPreloadSprite(this.asset);
+    var text = this.add.text(this.game.width * 0.5, this.game.height * 0.25, 'Loading Resources...    0/0 Assets Loaded (0%)', {
+      fill: '#FFFFFF'
+    });
+    text.anchor.setTo(0.5);
+    var updateProgress = () => {
+      text.setText('Loading Resources...    ' + this.load.totalLoadedFiles() + '/' + (this.load.totalLoadedFiles() + this.load.totalQueuedFiles()) + ' Assets Loaded (' + this.load.progress + '%)');
+    };
+    this.load.onFileStart.add(updateProgress);
+    this.load.onFileComplete.add(updateProgress);
 
     //Setup loading and its events
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
