@@ -37,7 +37,7 @@ class Preloader extends Phaser.State {
       this.game.load.baseURL = window.location;
       this.game.load.path = 'assets/';
       this.game.load.image('bullet', 'bullett orange.png');
-      this.game.load.images(['play', 'Pause', 'person', 'pwrblt', 'snow']);
+      this.game.load.images(['play', 'Pause', 'person', 'pwrblt', 'snow', 'Zombie']);
       this.game.load.images(this.generateImages());
       this.game.load.spritesheet('missile', null, 252 * 0.25, 89 * 0.25, 4);
       this.game.load.spritesheet('portal', null, 32, 32);

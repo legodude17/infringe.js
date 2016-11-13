@@ -150,6 +150,9 @@ class Game extends Phaser.State {
     }
     this.imgs.text = this.add.text(32, (y * 32) + 64, this.wordWrap(room.text, 50), {fill: '#FFFFFF', fontSize: '20px'});
     this.game.world.setBounds(0, 0, x * 32, y * 32);
+    if (room.parsedEnts.length) {
+      room.parsedEnts.forEach(this.createEntity, this);
+    }
   }
 
   advance() {

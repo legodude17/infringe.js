@@ -64,7 +64,7 @@ rooms.Outside = {
   textureMap: {s: 'snow'},
   music: 'Dumdum.wav',
   next: "?",
-  text: 'Wha? What should have been a controlled experiment somehow got you in the middle of a barren tundra, even though you live in florida',
+  text: 'Wha? What should have been a controlled experiment somehow got you in the middle of a barren tundra, even though you live in Florida.',
   entitys: ['100,100,enemies/Zombie'],
   parsedEnts: []
 };
