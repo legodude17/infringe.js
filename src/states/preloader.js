@@ -32,6 +32,7 @@ class Preloader extends Phaser.State {
       this.game.load.images(this.generateImages());
       this.game.load.spritesheet('missile', null, 252 * 0.25, 89 * 0.25, 4);
       this.game.load.spritesheet('portal', null, 32, 32);
+      this.game.load.audio('intro', 'NewStuff.wav');
       Object.keys(rooms.rooms).filter(function (v) {
         return v !== 'default';
       }).forEach(function (i) {
@@ -41,6 +42,7 @@ class Preloader extends Phaser.State {
   }
 
   onLoadComplete() {
+    console.log('Load complete!');
     this.ready = true;
   }
 
@@ -55,7 +57,7 @@ class Preloader extends Phaser.State {
         return v.textureMap[i];
       }).filter(function (v) {
         return v !== 'portal';
-      })
+      });
     }).forEach(function (v) {
       v.forEach(function (v) {
         imgs.push(v);

@@ -107,11 +107,7 @@ class Game extends Phaser.State {
     room = this.room = rooms.rooms[this.game.global.room];
     rooms.parse(room);
     document.title = this.game.global.room + ' Room - Infringe';
-    console.log(room.music.replace('.wav', ''));
-    var audio = this.add.audio(room.music.replace('.wav', ''));
-    audio.play(null, null, null, true, true);
-    audio.mute = false;
-    audio.volume = 1;
+    this.game.global.songManager.play(room.music.replace('.wav', ''));
     for (y = 0; y < room.mapParsed.length; y++) {
       for (x = 0; x < room.mapParsed[y].length; x++) {
         if (room.mapParsed[y][x] === 'portal') {

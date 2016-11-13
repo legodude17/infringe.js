@@ -1,3 +1,4 @@
+import SongManager from '../songs.js';
 class Boot extends Phaser.State {
 
   constructor() {
@@ -32,7 +33,8 @@ class Boot extends Phaser.State {
 
   initGlobalVariables(){
     this.game.global = {
-      room: 'Bed'
+      room: 'Bed',
+      songManager: new SongManager(this.game)
     };
   }
 

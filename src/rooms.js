@@ -23,15 +23,15 @@ rooms.Bed={
   music: 'Dumdum.wav',
   next: 'Lab'
 };
-/*rooms.Lab = {
+rooms.Lab = {
   map:[
-
+    
   ],
   mapParsed: [],
   textureMap:{},
   music:'Lab Room.wav',
   next: 'Test'
-};*/
+};
 
 var parseTextures=(obj)=>{
   if(!obj.mapParsed.length){

@@ -9,6 +9,7 @@ class Menu extends Phaser.State {
       font: '42px Arial', fill: '#ffffff', align: 'center'
   }).anchor.set(0.5);
     this.add.button(this.game.width * 0.5, this.game.height * 0.5, 'play', this.startGame, this).anchor.set(0.5);
+    this.game.global.songManager.play('intro');
   }
 
   update() {}
