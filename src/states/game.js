@@ -1,3 +1,4 @@
+import rooms from '../rooms.js';
 class Game extends Phaser.State {
 
   constructor() {
@@ -5,20 +6,30 @@ class Game extends Phaser.State {
   }
 
   create() {
-    var text = this.add.text(this.game.width * 0.5, this.game.height * 0.5, 'Game', {
-      font: '42px Arial', fill: '#ffffff', align: 'center'
-    });
-    text.anchor.set(0.5);
-
-    this.input.onDown.add(this.endGame, this);
+    this.game.add.image(0, 0, 'background');
+    this.game.global.player = this.add.sprite(this.game.width * 0.5, this.game.height * 0.5, 'person');
+    this.game.global.room = this.game.global.room || 'Lab';
+    this.add.button(this.game.width - 40, 10, 'Pause', this.pauseGame, this);
   }
 
   update() {
 
   }
 
+  pauseGame() {
+    this.game.pause();
+  }
+
+  renderRoom() {
+
+  }
+
   endGame() {
     this.game.state.start('gameover');
+  }
+
+  paused() {
+
   }
 
 }
