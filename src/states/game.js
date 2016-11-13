@@ -3,7 +3,6 @@ class Game extends Phaser.State {
 
   constructor() {
     super();
-    this.playButton = null;
   }
 
   create() {
@@ -13,26 +12,17 @@ class Game extends Phaser.State {
     player.anchor.setTo(0.5, 0.5);
     this.game.global.room = this.game.global.room || 'Bed';
     this.add.button(this.game.width - 40, 10, 'Pause', this.pauseGame, this);
-    this.keys = this.game.input.keyboard.addKeys( { 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'right': Phaser.KeyCode.D, 'turnleft': 188, 'turnright': 190} );
+    this.keys = this.game.input.keyboard.addKeys( { 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'right': Phaser.KeyCode.D} );
     var weapon = this.add.weapon(10, 'bullet');
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
     weapon.bulletSpeed = 600;
     weapon.fireRate = 1;
     weapon.trackSprite(player, 0, 0, true);
-    this.game.input.keyboard.onUpCallback = function (e) {
-      if (e.key === '/') {
-        weapon.fire();
-      }
-    };
-    this.game.input.keyboard.start();
+    this.game.input.onDown.add(function(){this.fire(); }, weapon);
   }
 
   update() {
-    if (this.keys.turnleft.isDown) {
-      this.player.rotation -= 0.037;
-    } else if (this.keys.turnright.isDown) {
-      this.player.rotation += 0.037;
-    }
+    this.player.rotation = this.game.physics.arcade.angleToPointer(this.player);
     if (this.keys.up.isDown) {
       this.player.body.velocity.y = -143;
     } else {
@@ -46,7 +36,7 @@ class Game extends Phaser.State {
       this.player.body.velocity.x = -143;
     } else {
       if (this.keys.right.isDown) {
-        this.player.body.velocity.x = 50;
+        this.player.body.velocity.x = 143;
       } else {
         this.player.body.velocity.x = 0;
       }
@@ -57,22 +47,18 @@ class Game extends Phaser.State {
     this.game.paused = true;
   }
 
-  renderRoom() {
-
-  }
-
   endGame() {
     this.game.state.start('gameover');
   }
 
   paused() {
-    this.playButton = this.add.button(this.game.width * 0.5, this.game.height * 0.5, 'play', this.resumeGame, this);
-    this.playButton.anchor.set(0.5);
-    setTimeout(this.resumeGame.bind(this), 1000);
+    this.pausedText = this.add.text(this.game.width * 0.5, this.game.height * 0.25, 'Paused');
+    this.pausedText.anchor.set(0.5);
+    this.game.input.onDown.addOnce(this.resumeGame, this);
   }
 
   resumed() {
-    this.playButton.destroy();
+    this.pausedText.destroy();
   }
 
   resumeGame() {
