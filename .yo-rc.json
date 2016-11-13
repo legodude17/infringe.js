@@ -1,0 +1,7 @@
+{
+  "generator-phaser": {
+    "projectName": "infringe.js",
+    "esVersion": 6,
+    "gameFolder": "boilerplate"
+  }
+}
