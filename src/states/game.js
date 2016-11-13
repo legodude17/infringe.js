@@ -6,7 +6,7 @@ class Game extends Phaser.State {
   }
 
   create() {
-    this.game.add.image(0, 0, 'background');
+    this.game.add.tileSprite(0, 0, this.game.width, this.game.height, 'snow');
     var player = this.player = this.game.global.player = this.add.sprite(this.game.width * 0.5, this.game.height * 0.5, 'person');
     this.game.physics.enable(player, Phaser.Physics.ARCADE);
     player.anchor.setTo(0.5, 0.5);
