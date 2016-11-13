@@ -26,38 +26,23 @@ rooms.Bed={
 };
 rooms.Lab = {
   map:[
-    'wwwwwwwwwwwwwwwwww',
-    'wwwwwwwwwwwwwwwwww',
-    'wwwwwwwcccwwwwwwww',
-    'wwwwwwwc cwwwwwwww',
-    'wwwwwwwcccwwwwwwww',
-    'wwwwwwwwwwwwwwwwwp'
+    'wwwwwwwwwwwwwwwwww                          wwwwwwwwwwwwwwwwwwwwwwww',
+    'wwwwwwwwwwwwwwwwww                          wwwwwwwwwwwdwwwwwwwwwww',
+    'wwwwwwwcccwwwwwwww                          wwwwwwwwwggdggwwwwwwwwww',
+    'wwwwwwwc cwwwwwwww                          wwwwwwwwwgeeegwwwwwwwwww',
+    'wwwwwwwcccwwwwwwww                          wwwwwwwwddebedddwwwwwwww',
+    'wwwwwwwwwwwwwwwwww                          wwwwwwwwwgeeegwwwwwwwwww',
+    '                ww                          wwwwwwwwwggdggwwwwwwwwww',
+    '                wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdwwwwwwwwwwww',
+    '                wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww'
   ],
   mapParsed: [],
-  textureMap:{w:'planks_big_oak', c:'wool_colored_cyan', p: 'portal', 'i': 'cauldron_inner'},
+  textureMap:{w:'planks_big_oak', c:'wool_colored_cyan', p: 'portal', 'i': 'cauldron_inner', b: 'activate', d: 'diamond_block', g: 'gold_block', e:'emerald_block'},
   music:'Lab Room.wav',
-  next: 'Test',
-  walls: ['8,3'],
-  text: 'This is your lab, where you make the most important discoveries. You must go the the ajointed hall before you can run the test.'
-};
-rooms.Test = {
-  map:[
-    'wwwwwwwwwwwwwwwwwwwwwwww',
-    'wwwwwwwwwwwdwwwwwwwwwww',
-    'wwwwwwwwwggdggwwwwwwwwww',
-    'wwwwwwwwwgeeegwwwwwwwwww',
-    'wwwwwwwwddebedddwwwwwwww',
-    'wwwwwwwwwgeeegwwwwwwwwww',
-    'wwwwwwwwwggdggwwwwwwwwww',
-    'wwwwwwwwwwwdwwwwwwwwwwww',
-    'wwwwwwwwwwwwwwwwwwwwwwww'
-  ],
-  mapParsed: [],
-  textureMap: {w: 'planks_big_oak', p:'portal', b: 'activate', e: 'emerald_block', d: 'diamond_block', g: 'gold_block'},
-  music: '',
   next: 'Outside',
-  text: 'This is where the text happens...\nPress the button in the middle to run the experiment.',
-  onButtonPress: function () {
+  walls: ['8,3'],
+  text: 'This is your lab, where you make the most important discoveries. Go through the hallway to test it out.',
+  onButtonPress: function() {
     this.advance();
   }
 };
@@ -77,7 +62,7 @@ rooms.Outside = {
   textureMap: {s: 'snow'},
   music: '',
   next: "?",
-  text: 'Wha? What should have been a controlled experiment somehow got you in the middle of a barren tundra, even though you live in florida.'
+  text: 'Wha? What should have been a controlled experiment somehow got you in the middle of a barren tundra, even though you live in florida'
 };
 
 var parseTextures=function(obj){

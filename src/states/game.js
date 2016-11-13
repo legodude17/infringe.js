@@ -21,8 +21,10 @@ class Game extends Phaser.State {
     weapon.bulletSpeed = 600;
     weapon.fireRate = 1;
     weapon.trackSprite(player, 0, 0, true);
+    this.weapon = weapon;
     this.game.input.onDown.add(function(){if (player.data.poweredUp){}else{weapon.fire(); }});
     this.enemies = this.add.group(null, 'enemies', false, true, Phaser.Physics.ARCADE);
+    this.game.camera.follow(player);
   }
 
   update() {
@@ -52,6 +54,8 @@ class Game extends Phaser.State {
       this.advance();
     }
     this.game.physics.arcade.collide(this.player, this.walls);
+    this.game.physics.arcade.collide(this.walls, this.missile, function(missile){console.log('Collide!'); missile.kill(); });
+    this.game.physics.arcade.collide(this.weapon, this.walls, function(bullet){bullet.kill(); });
     this.player.bringToTop();
   }
 
@@ -72,7 +76,7 @@ class Game extends Phaser.State {
     missle.animations.play('go', 10, true);
     missle.checkWorldBounds = true;
     missle.outOfBoundsKill = true;
-    this.missle = true;
+    this.missle = missle;
     missle.events.onKilled.add(function() {
       this.missle = false;
     }, this);
@@ -114,7 +118,7 @@ class Game extends Phaser.State {
       this.imgs.forEach(function(v){v.destroy(); });
       this.imgs = [];
     }
-    this.walls.children.forEach(function(v){v.destroy(); })
+    this.walls.children.forEach(function(v){v.destroy(); });
     room = this.room = rooms.rooms[this.game.global.room];
     rooms.parse(room);
     document.title = this.game.global.room + ' Room - Infringe';
@@ -123,6 +127,8 @@ class Game extends Phaser.State {
       for (x = 0; x < room.mapParsed[y].length; x++) {
         if (room.mapParsed[y][x] === 'portal') {
           this.imgs.push(this.createPortal(x * 32, y * 32));
+        } else if (room.mapParsed[y][x] === undefined) {
+          this.createWall(x*32, y*32);
         } else if (room.mapParsed[y][x] === 'activate') {
           this.imgs.push(this.add.button(x * 32, y * 32, 'activate', room.onButtonPress, this));
         } else {
@@ -136,7 +142,7 @@ class Game extends Phaser.State {
         this.createWall(+room.walls[i].split(',')[0] * 32, +room.walls[i].split(',')[1] * 32);
       }
     }
-    this.imgs.text = this.add.text((x * 32) + 64, 32, this.wordWrap(room.text, 33), {fill: '#FFFFFF'});
+    this.imgs.text = this.add.text(32, (y * 32) + 64, this.wordWrap(room.text, 50), {fill: '#FFFFFF', fontSize: '20px'});
     this.game.world.setBounds(0, 0, x * 32, y * 32);
   }
 
